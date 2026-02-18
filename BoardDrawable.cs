@@ -2,6 +2,8 @@ using Microsoft.Maui.Graphics;
 
 namespace MultiPente;
 
+public bool ShadowsEnabled { get; set; } = true;
+public bool LastMoveHighlightEnabled { get; set; } = true;
 public sealed class BoardDrawable : IDrawable
 {
     public GameEngine Engine { get; }
