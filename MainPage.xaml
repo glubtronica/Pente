@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MultiPente.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#0F1115">
+
+    <Grid RowDefinitions="Auto,*" Padding="12">
+        <!-- Top HUD -->
+        <Border Grid.Row="0"
+                BackgroundColor="#1A1E24"
+                Stroke="#2B313A"
+                StrokeThickness="1"
+                Padding="12"
+                StrokeShape="RoundRectangle 14">
+            <Grid ColumnDefinitions="*,Auto,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="6">
+                <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="2">
+                    <Label x:Name="TurnLabel" Text="Turn" TextColor="#E5E7EB" FontSize="16" FontAttributes="Bold"/>
+                    <Label x:Name="ScoreLabel" Text="Scores" TextColor="#9CA3AF" FontSize="12"/>
+                </VerticalStackLayout>
+
+                <Button Grid.Row="0" Grid.Column="1" Text="Undo" Clicked="Undo_Clicked" />
+                <Button Grid.Row="0" Grid.Column="2" Text="Reset" Clicked="Reset_Clicked" />
+
+                <Label Grid.Row="1" Grid.ColumnSpan="3"
+                       x:Name="StatusLabel"
+                       Text=""
+                       TextColor="#FBBF24"
+                       FontSize="13" />
+            </Grid>
+        </Border>
+
+        <!-- Board -->
+        <Border Grid.Row="1"
+                Margin="0,12,0,0"
+                BackgroundColor="#111318"
+                Stroke="#2B313A"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 18">
+            <GraphicsView x:Name="BoardView"
+                          BackgroundColor="#111318"
+                          StartInteraction="BoardView_StartInteraction"
+                          DragInteraction="BoardView_DragInteraction"
+                          EndInteraction="BoardView_EndInteraction"/>
+        </Border>
+    </Grid>
+</ContentPage>
