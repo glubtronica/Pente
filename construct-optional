@@ -1,0 +1,9 @@
+public MainPage() : this(
+    new[] {
+        new GameSetupPlayer("P1",'G'),
+        new GameSetupPlayer("P2",'B'),
+        new GameSetupPlayer("P3",'W'),
+        new GameSetupPlayer("P4",'K'),
+    },
+    new GameUiSettings(true,true,true))
+{ }
