@@ -71,6 +71,16 @@ public sealed class GameEngine
 
     public int GetPairs(char token) => _capturedPairs.TryGetValue(token, out var v) ? v : 0;
 
+public void SetPlayerName(int index, string name)
+{
+    if (index < 0 || index >= _players.Count) return;
+    name = (name ?? "").Trim();
+    if (string.IsNullOrWhiteSpace(name)) name = $"P{index + 1}";
+
+    // Replace record (since Player is a record)
+    _players[index] = _players[index] with { Name = name };
+    StateChanged?.Invoke();
+}
     public void Reset()
     {
         Array.Clear(Board, 0, Board.Length);
