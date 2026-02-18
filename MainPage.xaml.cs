@@ -4,7 +4,36 @@ using System.Collections.Generic;
 
 namespace MultiPente;
 
-public partial class MainPage : ContentPage
+public MainPage(IReadOnlyList<GameSetupPlayer> players, GameUiSettings ui)
+{
+    InitializeComponent();
+
+    // Create engine with N players
+    _engine = new GameEngine(playerCount: players.Count);
+
+    // Apply player names (requires one tiny GameEngine method shown below)
+    for (int i = 0; i < players.Count; i++)
+        _engine.SetPlayerName(i, players[i].Name);
+
+    var drawable = new BoardDrawable(_engine, () => (_offsetX, _offsetY, _scale))
+    {
+        // Optional: if you add these properties to BoardDrawable (next section)
+        // ShadowsEnabled = ui.ShadowsEnabled,
+        // LastMoveHighlightEnabled = ui.LastMoveHighlightEnabled,
+    };
+
+    BoardView.Drawable = drawable;
+
+    _engine.StateChanged += () =>
+    {
+        RefreshHud();
+        BoardView.Invalidate();
+    };
+
+    BoardView.SizeChanged += (_, __) => CenterBoardIfNeeded(drawable);
+
+    RefreshHud();
+}
 {
     private readonly GameEngine _engine;
 
